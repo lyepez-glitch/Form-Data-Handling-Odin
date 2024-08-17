@@ -1,0 +1,29 @@
+get large photo
+identify serveral targets
+put their pixel positions in a database
+when user clicks pphoto
+a box appears around the spot that was clicked
+the box has a list of chars
+
+when user clicks one of these chars
+check in the database to see if that character's coordinates are in that box
+
+if the coordinates do not maatch give an error
+if match
+put a marker on that character's location(coordinates)
+remove the box
+
+get the timestamp of when the photo loads and when all the chars are identified get that time
+find the difference to show how much time it took
+do this on server side
+when the user wins and round is over
+prompt the user to input name and get the current time and put that in the users table
+
+when page loads store time in variable
+users table
+field name round score for round
+chars table
+field pixel positions
+click event
+find out how to get the coordinates clicked on
+setMarker function input coordinates
