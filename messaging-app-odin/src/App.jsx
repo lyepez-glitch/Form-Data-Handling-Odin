@@ -6,11 +6,11 @@ import Users from './User.jsx'
 
 function App() {
   const [user, setUser] = useState(null);
-  const users = [{name: 'Lucas'}]
+
 
   return (
     <>
-      <Users user = {user} users= {users}/>
+      <Users user = {user}/>
     </>
   )
 }
