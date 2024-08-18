@@ -15,11 +15,12 @@ datasource db {
 
 
 
-model Chars {
-  id     Int     @id @default(autoincrement())
-  name String
+model Char {
+  id      Int      @id @default(autoincrement())
+  name    String   @unique
   xcoord Int
   ycoord Int
+  showMarker       Boolean @default(false)
 }
 
 model User {
