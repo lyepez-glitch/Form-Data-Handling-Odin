@@ -1,0 +1,35 @@
+Authorization jwt passport
+send messages to other user
+customizing user profile
+user page update form when press edit with name email
+pic bio
+add phone number  or social media links
+
+make their profile private or posts private
+change theme
+update pw
+delete account
+add tags showing interests
+
+
+  user will login and have  a list of friends
+  when user clicks friend see a list of all the messages between them
+  there will be add a new message button
+  when clicked a message form opens
+  on submit the page of list of messages for that friend will be shown with the new message on the bottom
+  the users table will have records with the username and the friend id linking to the friend name in friend table
+users table record will have message id linking to the message record in table
+basically start with  dummy records in users with username, friend id linking to friend record
+then have for each of those the rec in friends with
+and every time add a message add a new record in the messages table
+
+
+  users table username pw
+
+
+  friends table name message id
+  messages table
+    text title timestamp
+build the core of backend and frontend
+
+deploy
