@@ -3,12 +3,15 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Employee from './Employee.jsx';
 import Role from './Role';
-
+import Audit from  './Audit';
+import Department from './Department';
 
 function App() {
 
     const [employees, setEmployees] = useState([]);
     const [roles, setRoles] = useState([]);
+    const [audits,setAudits] = useState([]);
+    const [departments,setDepartments] = useState([]);
 
     useEffect(() => {
         const fetchEmployees = async () => {
@@ -19,6 +22,9 @@ function App() {
             console.log('res', role_response);
             setEmployees(response.data);
             setRoles(role_response.data);
+            const auditResponse = await axios.get('http://localhost:8080/employeeAudits');
+            console.log('audit res', auditResponse);
+            setAudits(auditResponse.date);
         };
         fetchEmployees();
 
@@ -26,7 +32,9 @@ function App() {
 
     return (
         <div>
-            <Employee setEmployees = {setEmployees} employees={employees} />  <Role setRoles={setRoles} roles={roles}/>
+            <Employee setAudits={setAudits} setEmployees = {setEmployees} employees={employees} />  <Role setRoles={setRoles} roles={roles}/>
+            <Audit setAudits={setAudits} audits={audits}/>
+            <Department setDepartments={setDepartments} departments={departments}/>
 
         </div>
     );

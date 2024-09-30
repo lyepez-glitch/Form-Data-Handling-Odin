@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-function Employee({ employees,setEmployees }) {
+function Employee({ employees,setEmployees,setAudits }) {
     const [employeeName, setEmployeeName] = useState('');
     const [departmentId, setDepartmentId] = useState('');
     const [roleId, setRoleId] = useState('');
@@ -20,6 +20,7 @@ function Employee({ employees,setEmployees }) {
 
   const handleEditClick = (emp) => {
       setEdit(emp.id);
+      console.log('edited emp',emp)
       setEditedEmployeeName(emp.employeeName);
       setEditedDepartmentId(emp.departmentId);
       setEditedRoleId(emp.roleId);
@@ -28,6 +29,7 @@ function Employee({ employees,setEmployees }) {
 
   const handleEditSubmit = async(event,id)=>{
     event.preventDefault();
+    console.log('editedEmployeeName ',editedEmployeeName)
     const employeeDTO = {
       employeeName:editedEmployeeName,
       departmentId: Number(editedDepartmentId),
@@ -37,11 +39,16 @@ function Employee({ employees,setEmployees }) {
     console.log('Edited Employee DTO:', employeeDTO);
     const response = await axios.put(`http://localhost:8080/employees/update/${id}`,employeeDTO);
     console.log('update res:', response.data);
+
+
     setEditedEmployeeName('');
     setEditedDepartmentId('');
     setEditedRoleId('');
     setEditedSalary('');
     const fetchEmps = await axios.get('http://localhost:8080/employees');
+    const fetchAudits = await axios.get('http://localhost:8080/employeeAudits');
+    console.log('fetchAudits ',fetchAudits.data,fetchAudits);
+    setAudits(fetchAudits.data);
     setEdit(null);
     setEmployees(fetchEmps.data);
   }
@@ -63,6 +70,7 @@ function Employee({ employees,setEmployees }) {
     setSalary('');
     const fetchEmps = await axios.get('http://localhost:8080/employees');
     setEmployees(fetchEmps.data);
+
 
   }
   return (
