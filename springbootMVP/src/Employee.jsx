@@ -11,6 +11,13 @@ function Employee({ employees,setEmployees }) {
     const [editedDepartmentId,setEditedDepartmentId] = useState('');
     const [editedRoleId,setEditedRoleId] = useState('');
     const [editedSalary,setEditedSalary] = useState('');
+  const handleDeleteClick = async(id) =>{
+    const response = await axios.delete(`http://localhost:8080/employees/delete/${id}`);
+    console.log('delete res:', response.data);
+    const fetchEmps = await axios.get('http://localhost:8080/employees');
+    setEmployees(fetchEmps.data);
+  }
+
   const handleEditClick = (emp) => {
       setEdit(emp.id);
       setEditedEmployeeName(emp.employeeName);
@@ -99,7 +106,7 @@ function Employee({ employees,setEmployees }) {
                   <p>Employee Name: {emp.employeeName}</p>
                   <p>Salary: {emp.salary}</p>
                   <button onClick={()=>handleEditClick(emp)}>Edit</button>
-
+                  <button onClick={()=>handleDeleteClick(emp.id)}>Delete</button>
               </div>
 
             )
