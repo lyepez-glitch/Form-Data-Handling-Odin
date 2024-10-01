@@ -73,9 +73,16 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
         console.log('Review post res:', response.data);
         setReviewComments('');
         setReviewScore(0);
-        const fetchReviews = await axios.get(`http://localhost:8080/reviews/${empId}`);
+        const fetchReviews = await axios.get(`http://localhost:8080/reviews`);
         setReviews(fetchReviews.data);
     };
+
+    const handleReviewDeleteClick = async(id)=>{
+        const response = await axios.delete(`http://localhost:8080/reviews/delete/${id}`);
+        console.log('Delete review res:', response.data);
+        const fetchReviews = await axios.get(`http://localhost:8080/reviews`);
+        setReviews(fetchReviews.data);
+    }
 
     const handleReviewEditClick = (reviewId) => {
         setEditReview(reviewId);
@@ -94,7 +101,7 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
         const response = await axios.put(`http://localhost:8080/reviews/update/${reviewId}`, editedReviewDTO);
         console.log('Update review res:', response.data);
         setEditReview(null);
-        const fetchReviews = await axios.get(`http://localhost:8080/reviews/${emp.id}`);
+        const fetchReviews = await axios.get(`http://localhost:8080/reviews`);
         setReviews(fetchReviews.data);
     };
 
@@ -132,6 +139,7 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
                                 <div>Review Score: {review.reviewScore}</div>
                                 <div>Review Date: {review.reviewDate}</div>
                                 <button onClick={() => handleReviewEditClick(review.id)}>Edit Review</button>
+                                <button onClick={() => handleReviewDeleteClick(review.id)}>Delete Review</button>
                             </div>
                         )
                     ) : null

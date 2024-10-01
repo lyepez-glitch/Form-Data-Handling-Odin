@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
+import Review from './Review';
+import Promote from './Promote';
 
 function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,setReview }) {
     const [employeeName, setEmployeeName] = useState('');
@@ -40,7 +42,7 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
       setEditedRoleId(emp.roleId);
       setEditedSalary(emp.salary);
   };
-  const handleReviewEditSubmit = (review)=>{
+  const handleReviewEditSubmit = async(review)=>{
     event.preventDefault();
 
     const editedReviewDTO = {
@@ -176,9 +178,12 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
                   <p>Salary: {emp.salary}</p>
                   <button onClick={()=>handleEditClick(emp)}>Edit</button>
                   <button onClick={()=>handleDeleteClick(emp.id)}>Delete</button>
+                  <Promote setEmployees={setEmployees} employees={employees} emp={emp}/>
                   <h3>Add Review</h3>
                   {/* <button onClick={()=>handleReviewClick(emp.id)}>Add Review</button> */}
-                  <Review setReviews={setReviews} emp={employee} reviews={reviews} />
+                  <Review setReviews={setReviews} emp={emp} reviews={reviews} />
+
+
 
               </div>
 
