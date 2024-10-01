@@ -12,6 +12,8 @@ function App() {
     const [roles, setRoles] = useState([]);
     const [audits,setAudits] = useState([]);
     const [departments,setDepartments] = useState([]);
+    const [review,setReview] = useState([]);
+    const [reviews,setReviews] = useState([]);
 
     useEffect(() => {
         const fetchEmployees = async () => {
@@ -32,7 +34,7 @@ function App() {
 
     return (
         <div>
-            <Employee setAudits={setAudits} setEmployees = {setEmployees} employees={employees} />  <Role setRoles={setRoles} roles={roles}/>
+            <Employee review={review} setReview={setReview} setReviews={setReviews} reviews={reviews} setAudits={setAudits} setEmployees = {setEmployees} employees={employees} />  <Role setRoles={setRoles} roles={roles}/>
             <Audit setAudits={setAudits} audits={audits}/>
             <Department setDepartments={setDepartments} departments={departments}/>
 

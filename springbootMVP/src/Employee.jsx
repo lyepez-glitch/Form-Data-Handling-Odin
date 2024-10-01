@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-function Employee({ employees,setEmployees,setAudits }) {
+function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,setReview }) {
     const [employeeName, setEmployeeName] = useState('');
     const [departmentId, setDepartmentId] = useState('');
     const [roleId, setRoleId] = useState('');
@@ -11,6 +11,20 @@ function Employee({ employees,setEmployees,setAudits }) {
     const [editedDepartmentId,setEditedDepartmentId] = useState('');
     const [editedRoleId,setEditedRoleId] = useState('');
     const [editedSalary,setEditedSalary] = useState('');
+    const [reviewComments,setReviewComments] = useState('')
+    const [reviewScore,setReviewScore] = useState('')
+    const [reviewDate,setReviewDate] = useState('')
+    const [editReview,setEditReview] = useState('')
+    const [editedReviewComments,setEditedReviewComments] = useState('')
+    const [editedReviewScore,setEditedReviewScore] = useState('')
+    const [editedReviewDate,setEditedReviewDate] = useState('')
+  const handleReviewEditClick = async(id) =>{
+    setEditReview(id);
+  }
+  const handleReviewClick = async(id) =>{
+    setReview(id);
+  }
+
   const handleDeleteClick = async(id) =>{
     const response = await axios.delete(`http://localhost:8080/employees/delete/${id}`);
     console.log('delete res:', response.data);
@@ -26,6 +40,31 @@ function Employee({ employees,setEmployees,setAudits }) {
       setEditedRoleId(emp.roleId);
       setEditedSalary(emp.salary);
   };
+  const handleReviewEditSubmit = (review)=>{
+    event.preventDefault();
+
+    const editedReviewDTO = {
+      employeeId: review.employeeId,
+      reviewComments:editedReviewComments,
+      reviewScore: editedReviewScore,
+      reviewDate: editedReviewDate
+    }
+    console.log('Edited Review DTO:', editedReviewDTO);
+    const response = await axios.put(`http://localhost:8080/reviews/update/${id}`,editedReviewDTO);
+    console.log('update res:', response.data);
+
+
+    setEditedReviewComments('');
+    setEditedReviewScore('');
+    setEditedReviewDate('');
+
+
+    const fetchReviews = await axios.get('http://localhost:8080/reviews');
+
+
+    setEditReview(null);
+    setReviews(fetchReviews.data);
+  }
 
   const handleEditSubmit = async(event,id)=>{
     event.preventDefault();
@@ -73,6 +112,28 @@ function Employee({ employees,setEmployees,setAudits }) {
 
 
   }
+
+
+  const handleReviewSubmit = async (event,id) =>{
+    event.preventDefault();
+    const reviewDTO = {
+      employeeId: id,
+      reviewComments,
+      reviewScore,
+      reviewDate
+    }
+    console.log('Review DTO:', reviewDTO);
+    const response = await axios.post('http://localhost:8080/reviews/add',reviewDTO);
+    console.log('post res:', response.data);
+    setReviewComments('');
+    setReviewScore('');
+    setReviewDate('');
+    const fetchReviews = await axios.get('http://localhost:8080/reviews');
+    console.log('fetchReviews ',fetchReviews)
+    setReviews(fetchReviews.data);
+
+  }
+
   return (
     <div>
       <div>
@@ -115,6 +176,10 @@ function Employee({ employees,setEmployees,setAudits }) {
                   <p>Salary: {emp.salary}</p>
                   <button onClick={()=>handleEditClick(emp)}>Edit</button>
                   <button onClick={()=>handleDeleteClick(emp.id)}>Delete</button>
+                  <h3>Add Review</h3>
+                  {/* <button onClick={()=>handleReviewClick(emp.id)}>Add Review</button> */}
+                  <Review setReviews={setReviews} emp={employee} reviews={reviews} />
+
               </div>
 
             )
