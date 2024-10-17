@@ -12,9 +12,9 @@ function Department({setDepartments,departments}){
     const [edit,setEdit] = useState(0);
 
   const handleDeleteDepartmentClick = async (id) => {
-    const response = await axios.delete(`http://localhost:8080/departments/delete/${id}`);
+    const response = await axios.delete(`http://localhost:8081/departments/delete/${id}`);
     console.log('department delete res:', response.data);
-    const fetchDepartments = await axios.get('http://localhost:8080/departments');
+    const fetchDepartments = await axios.get('http://localhost:8081/departments');
     setDepartments(fetchDepartments.data);
   }
 
@@ -33,11 +33,11 @@ function Department({setDepartments,departments}){
 
     }
     console.log('Edited Department DTO:', departmentDTO,"id",id);
-    const response = await axios.put(`http://localhost:8080/departments/update/${id}`,departmentDTO);
+    const response = await axios.put(`http://localhost:8081/departments/update/${id}`,departmentDTO);
     console.log('update res:', response.data);
     setEditedDepartmentName('');
     setEditedDepartmentManager('');
-    const fetchDepartments = await axios.get('http://localhost:8080/departments');
+    const fetchDepartments = await axios.get('http://localhost:8081/departments');
     console.log('fetch departments after update',fetchDepartments)
     setEdit(null);
     setDepartments(fetchDepartments.data);
@@ -49,21 +49,22 @@ function Department({setDepartments,departments}){
       departmentManager: Number(departmentManager)
     }
     console.log('dept DTO:', departmentDTO);
-    const response = await axios.post('http://localhost:8080/departments/add',departmentDTO);
+    const response = await axios.post('http://localhost:8081/departments/add',departmentDTO);
     console.log('department post res:', response.data);
     setDepartmentName('');
     setDepartmentManager(0);
-    const fetchDepartments = await axios.get('http://localhost:8080/departments');
+    const fetchDepartments = await axios.get('http://localhost:8081/departments');
     console.log('Fetched departments:', fetchDepartments.data);
     setDepartments(fetchDepartments.data);
 
   }
   return (
     <div>
-      <div>
+      <h2>Departments</h2>
+      <div className="deptsContainer">
           {departments.map((department, index) => (
             edit === department.id?(
-              <form key={department.id} onSubmit = {(e)=>handleEditDepartmentSubmit(e,department.id,department)}>
+              <form className="editDept" key={department.id} onSubmit = {(e)=>handleEditDepartmentSubmit(e,department.id,department)}>
 
                 <label>
                     Edit Department Name:
@@ -85,7 +86,7 @@ function Department({setDepartments,departments}){
 
         </form>
             ):(
-              <div key={department.id}>
+              <div className="dept" key={department.id}>
                   <p>Department Name: {department.departmentName}</p>
                   <p>Department Manager: {department.departmentManager}</p>
                   <button onClick={()=>handleEditDepartmentClick(department)}>Edit</button>
@@ -96,7 +97,9 @@ function Department({setDepartments,departments}){
 
           ))}
       </div>
-      <form onSubmit = {handleDepartmentSubmit}>
+
+      <h2 className="deptHeader">Add department</h2>
+      <form className ="deptForm" onSubmit = {handleDepartmentSubmit}>
 
                 <label>
                     Department Name:

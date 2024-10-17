@@ -11,9 +11,9 @@ function Role({setRoles,roles}){
     const [editedSalary,setEditedSalary] = useState('');
 
   const handleDeleteRoleClick = async (id) => {
-    const response = await axios.delete(`http://localhost:8080/roles/delete/${id}`);
+    const response = await axios.delete(`http://localhost:8081/roles/delete/${id}`);
     console.log('role delete res:', response.data);
-    const fetchRoles = await axios.get('http://localhost:8080/roles');
+    const fetchRoles = await axios.get('http://localhost:8081/roles');
     setRoles(fetchRoles.data);
   }
 
@@ -30,11 +30,11 @@ function Role({setRoles,roles}){
       salary: Number(editedSalary)
     }
     console.log('Edited Role DTO:', roleDTO,"id",id);
-    const response = await axios.put(`http://localhost:8080/roles/update/${id}`,roleDTO);
+    const response = await axios.put(`http://localhost:8081/roles/update/${id}`,roleDTO);
     console.log('update res:', response.data);
     setEditedRoleName('');
     setEditedSalary('');
-    const fetchRoles = await axios.get('http://localhost:8080/roles');
+    const fetchRoles = await axios.get('http://localhost:8081/roles');
     console.log('fetch roles after update',fetchRoles)
     setEdit(null);
     setRoles(fetchRoles.data);
@@ -46,19 +46,21 @@ function Role({setRoles,roles}){
       salary: Number(salary)
     }
     console.log('Role DTO:', roleDTO);
-    const response = await axios.post('http://localhost:8080/roles/add',roleDTO);
+    const response = await axios.post('http://localhost:8081/roles/add',roleDTO);
     console.log('role post res:', response.data);
     setRoleName('');
     setRoleId('');
     setSalary('');
-    const fetchRoles = await axios.get('http://localhost:8080/roles');
+    const fetchRoles = await axios.get('http://localhost:8081/roles');
     console.log('Fetched roles:', fetchRoles.data);
     setRoles(fetchRoles.data);
 
   }
   return (
     <div>
-      <div>
+      <h2 className="rolesHeader">Roles</h2>
+      <div className="rolesContainer">
+
           {roles.map((role, index) => (
             edit === role.id?(
               <form key={role.id} onSubmit = {(e)=>handleEditRoleSubmit(e,role.id,role)}>
@@ -79,18 +81,23 @@ function Role({setRoles,roles}){
 
         </form>
             ):(
-              <div key={role.id}>
+              <>
+
+              <div className="role" key={role.id}>
                   <p>Role Name: {role.roleName}</p>
                   <p>Salary: {role.salary}</p>
                   <button onClick={()=>handleEditRoleClick(role)}>Edit</button>
                   <button onClick={()=>handleDeleteRoleClick(role.id)}>Delete</button>
               </div>
+              </>
+
 
             )
 
           ))}
       </div>
-      <form onSubmit = {handleRoleSubmit}>
+      <h2 className="addRole">Add Role</h2>
+      <form className= "roleForm" onSubmit = {handleRoleSubmit}>
 
                 <label>
                     Role Name:
@@ -98,7 +105,7 @@ function Role({setRoles,roles}){
                         onChange={(e) => setRoleName(e.target.value)}/>
                 </label>
 
-                <label>
+                <label className="salary">
                     Salary:
                     <input type="number" value={salary} onChange={(e) => setSalary(e.target.value)}/>
                 </label>

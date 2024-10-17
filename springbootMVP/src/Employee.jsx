@@ -28,9 +28,9 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
   }
 
   const handleDeleteClick = async(id) =>{
-    const response = await axios.delete(`http://localhost:8080/employees/delete/${id}`);
+    const response = await axios.delete(`http://localhost:8081/employees/delete/${id}`);
     console.log('delete res:', response.data);
-    const fetchEmps = await axios.get('http://localhost:8080/employees');
+    const fetchEmps = await axios.get('http://localhost:8081/employees');
     setEmployees(fetchEmps.data);
   }
 
@@ -52,7 +52,7 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
       reviewDate: editedReviewDate
     }
     console.log('Edited Review DTO:', editedReviewDTO);
-    const response = await axios.put(`http://localhost:8080/reviews/update/${id}`,editedReviewDTO);
+    const response = await axios.put(`http://localhost:8081/reviews/update/${id}`,editedReviewDTO);
     console.log('update res:', response.data);
 
 
@@ -61,7 +61,7 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
     setEditedReviewDate('');
 
 
-    const fetchReviews = await axios.get('http://localhost:8080/reviews');
+    const fetchReviews = await axios.get('http://localhost:8081/reviews');
 
 
     setEditReview(null);
@@ -78,7 +78,7 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
       salary: Number(editedSalary)
     }
     console.log('Edited Employee DTO:', employeeDTO);
-    const response = await axios.put(`http://localhost:8080/employees/update/${id}`,employeeDTO);
+    const response = await axios.put(`http://localhost:8081/employees/update/${id}`,employeeDTO);
     console.log('update res:', response.data);
 
 
@@ -86,8 +86,8 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
     setEditedDepartmentId('');
     setEditedRoleId('');
     setEditedSalary('');
-    const fetchEmps = await axios.get('http://localhost:8080/employees');
-    const fetchAudits = await axios.get('http://localhost:8080/employeeAudits');
+    const fetchEmps = await axios.get('http://localhost:8081/employees');
+    const fetchAudits = await axios.get('http://localhost:8081/employeeAudits');
     console.log('fetchAudits ',fetchAudits.data,fetchAudits);
     setAudits(fetchAudits.data);
     setEdit(null);
@@ -103,13 +103,13 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
       salary: Number(salary)
     }
     console.log('Employee DTO:', employeeDTO);
-    const response = await axios.post('http://localhost:8080/employees/add',employeeDTO);
+    const response = await axios.post('http://localhost:8081/employees/add',employeeDTO);
     console.log('post res:', response.data);
     setEmployeeName('');
     setDepartmentId('');
     setRoleId('');
     setSalary('');
-    const fetchEmps = await axios.get('http://localhost:8080/employees');
+    const fetchEmps = await axios.get('http://localhost:8081/employees');
     setEmployees(fetchEmps.data);
 
 
@@ -125,12 +125,12 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
       reviewDate
     }
     console.log('Review DTO:', reviewDTO);
-    const response = await axios.post('http://localhost:8080/reviews/add',reviewDTO);
+    const response = await axios.post('http://localhost:8081/reviews/add',reviewDTO);
     console.log('post res:', response.data);
     setReviewComments('');
     setReviewScore('');
     setReviewDate('');
-    const fetchReviews = await axios.get('http://localhost:8080/reviews');
+    const fetchReviews = await axios.get('http://localhost:8081/reviews');
     console.log('fetchReviews ',fetchReviews)
     setReviews(fetchReviews.data);
 
@@ -138,10 +138,12 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
 
   return (
     <div>
-      <div>
+      <h2>Employees</h2>
+      <div className="empsContainer">
+
           {employees.map((emp, index) => (
             edit === emp.id?(
-              <form key={emp.id} onSubmit = {(e)=>handleEditSubmit(e,emp.id)}>
+              <form className="editEmpForm" key={emp.id} onSubmit = {(e)=>handleEditSubmit(e,emp.id)}>
 
                 <label>
                     Edit Employee Name:
@@ -173,25 +175,29 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
 
         </form>
             ):(
-              <div key={emp.id}>
+              <div className="empsContainer">
+                <div className="emp" key={emp.id}>
                   <p>Employee Name: {emp.employeeName}</p>
                   <p>Salary: {emp.salary}</p>
                   <button onClick={()=>handleEditClick(emp)}>Edit</button>
                   <button onClick={()=>handleDeleteClick(emp.id)}>Delete</button>
                   <Promote setEmployees={setEmployees} employees={employees} emp={emp}/>
-                  <h3>Add Review</h3>
+
                   {/* <button onClick={()=>handleReviewClick(emp.id)}>Add Review</button> */}
                   <Review setReviews={setReviews} emp={emp} reviews={reviews} />
 
 
 
               </div>
+              </div>
+
 
             )
 
           ))}
       </div>
-      <form onSubmit = {handleSubmit}>
+      <h2 className="addEmp">Add Employee</h2>
+      <form className="empForm" onSubmit = {handleSubmit}>
 
                 <label>
                     Employee Name:
@@ -213,7 +219,7 @@ function Employee({ employees,setEmployees,setAudits,setReviews,reviews,review,s
                 </label>
 
 
-                <label>
+                <label className="salary">
                     Salary:
                     <input type="number" value={salary} onChange={(e) => setSalary(e.target.value)}/>
                 </label>

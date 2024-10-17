@@ -16,9 +16,9 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
     const [editReview, setEditReview] = useState(null); // State to track which review is being edited
 
     const handleDeleteDepartmentClick = async (id) => {
-        const response = await axios.delete(`http://localhost:8080/departments/delete/${id}`);
+        const response = await axios.delete(`http://localhost:8081/departments/delete/${id}`);
         console.log('department delete res:', response.data);
-        const fetchDepartments = await axios.get('http://localhost:8080/departments');
+        const fetchDepartments = await axios.get('http://localhost:8081/departments');
         setDepartments(fetchDepartments.data);
     };
 
@@ -35,11 +35,11 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
             departmentManager: editedDepartmentManager
         };
         console.log('Edited Department DTO:', departmentDTO, "id", id);
-        const response = await axios.put(`http://localhost:8080/departments/update/${id}`, departmentDTO);
+        const response = await axios.put(`http://localhost:8081/departments/update/${id}`, departmentDTO);
         console.log('update res:', response.data);
         setEditedDepartmentName('');
         setEditedDepartmentManager('');
-        const fetchDepartments = await axios.get('http://localhost:8080/departments');
+        const fetchDepartments = await axios.get('http://localhost:8081/departments');
         console.log('fetch departments after update', fetchDepartments);
         setEdit(null);
         setDepartments(fetchDepartments.data);
@@ -52,11 +52,11 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
             departmentManager: Number(departmentManager)
         };
         console.log('dept DTO:', departmentDTO);
-        const response = await axios.post('http://localhost:8080/departments/add', departmentDTO);
+        const response = await axios.post('http://localhost:8081/departments/add', departmentDTO);
         console.log('department post res:', response.data);
         setDepartmentName('');
         setDepartmentManager(0);
-        const fetchDepartments = await axios.get('http://localhost:8080/departments');
+        const fetchDepartments = await axios.get('http://localhost:8081/departments');
         console.log('Fetched departments:', fetchDepartments.data);
         setDepartments(fetchDepartments.data);
     };
@@ -69,18 +69,18 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
             reviewScore
         };
         console.log('Review DTO:', reviewDTO);
-        const response = await axios.post('http://localhost:8080/reviews/add', reviewDTO);
+        const response = await axios.post('http://localhost:8081/reviews/add', reviewDTO);
         console.log('Review post res:', response.data);
         setReviewComments('');
         setReviewScore(0);
-        const fetchReviews = await axios.get(`http://localhost:8080/reviews`);
+        const fetchReviews = await axios.get(`http://localhost:8081/reviews`);
         setReviews(fetchReviews.data);
     };
 
     const handleReviewDeleteClick = async(id)=>{
-        const response = await axios.delete(`http://localhost:8080/reviews/delete/${id}`);
+        const response = await axios.delete(`http://localhost:8081/reviews/delete/${id}`);
         console.log('Delete review res:', response.data);
-        const fetchReviews = await axios.get(`http://localhost:8080/reviews`);
+        const fetchReviews = await axios.get(`http://localhost:8081/reviews`);
         setReviews(fetchReviews.data);
     }
 
@@ -98,16 +98,17 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
             reviewScore: editedReviewScore
         };
         console.log('Edited Review DTO:', editedReviewDTO, "id", reviewId);
-        const response = await axios.put(`http://localhost:8080/reviews/update/${reviewId}`, editedReviewDTO);
+        const response = await axios.put(`http://localhost:8081/reviews/update/${reviewId}`, editedReviewDTO);
         console.log('Update review res:', response.data);
         setEditReview(null);
-        const fetchReviews = await axios.get(`http://localhost:8080/reviews`);
+        const fetchReviews = await axios.get(`http://localhost:8081/reviews`);
         setReviews(fetchReviews.data);
     };
 
     return (
         <div>
-            <form onSubmit={(e) => handleReviewSubmit(e, emp.id)}>
+            <h3>Add Review</h3>
+            <form className="reviewForm" onSubmit={(e) => handleReviewSubmit(e, emp.id)}>
                 <label>
                     Add Review Comments:
                     <input type="text" value={reviewComments} onChange={(e) => setReviewComments(e.target.value)} />
@@ -116,9 +117,10 @@ function Review({ setReviews, emp, reviews }) {  // Added 'emp' and 'reviews' as
                     Add Review Score:
                     <input type="number" value={reviewScore} onChange={(e) => setReviewScore(e.target.value)} />
                 </label>
-                <button type="submit">Submit</button>
+                <button className="reviewSubmit" type="submit">Submit</button>
             </form>
             <div>
+
                 {reviews.map((review) => (
                     review.employeeId === emp.id ? (
                         editReview === review.id ? (

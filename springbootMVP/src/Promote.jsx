@@ -19,12 +19,12 @@ function Promote({emp,employees,setEmployees}){
     }
 
     console.log('PromoteDTO:', promoteDTO);
-    const response = await axios.put(`http://localhost:8080/employees/promote/${emp.id}`,promoteDTO);
+    const response = await axios.put(`http://localhost:8081/employees/promote/${emp.id}`,promoteDTO);
     console.log('promote res:', response.data);
     setPromoteSalary('');
     setPromoteRole('');
     setPromote('');
-    const fetchEmployees = await axios.get('http://localhost:8080/employees');
+    const fetchEmployees = await axios.get('http://localhost:8081/employees');
     console.log('fetchEmployees ',fetchEmployees);
     setEmployees(fetchEmployees.data);
   }
@@ -34,7 +34,7 @@ function Promote({emp,employees,setEmployees}){
       <div>
         {
           promote === emp.id?(
-            <form key={emp.id} onSubmit = {(e)=>handlePromoteSubmit(e,emp)}>
+            <form className="promoteForm" key={emp.id} onSubmit = {(e)=>handlePromoteSubmit(e,emp)}>
 
 
                 <label>

@@ -21,7 +21,7 @@ function App() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
+      const response = await axios.post('http://localhost:8081/api/auth/login', {
         username,
         password,
       });
@@ -35,7 +35,7 @@ function App() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/signup', {
+      const response = await axios.post('http://localhost:8081/api/auth/signup', {
         username,
         password,
       });
@@ -49,15 +49,15 @@ function App() {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/employees');
+        const response = await axios.get('http://localhost:8081/employees');
         console.log('res', response);
         setEmployees(response.data);
 
-        const roleResponse = await axios.get('http://localhost:8080/roles');
+        const roleResponse = await axios.get('http://localhost:8081/roles');
         console.log('res', roleResponse);
         setRoles(roleResponse.data);
 
-        const auditResponse = await axios.get('http://localhost:8080/employeeAudits');
+        const auditResponse = await axios.get('http://localhost:8081/employeeAudits');
         console.log('audit res', auditResponse);
         setAudits(auditResponse.data); // Should be 'data', not 'date'
       } catch (error) {

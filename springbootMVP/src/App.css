@@ -1,42 +1,221 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+    height: 6em;
+    padding: 1.5em;
+    will-change: filter;
+    transition: filter 300ms;
 }
+
 .logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+    filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+    filter: drop-shadow(0 0 2em #61dafbaa);
 }
 
 @keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+    a:nth-of-type(2) .logo {
+        animation: logo-spin infinite 20s linear;
+    }
 }
 
 .card {
-  padding: 2em;
+    padding: 2em;
 }
 
 .read-the-docs {
-  color: #888;
+    color: #888;
+}
+
+body {
+    background-color: lightblue;
+}
+
+form {
+    background-color: orange;
+    padding: 20px 20px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    transform: scale(.7);
+}
+
+.role {
+    background-color: lightgreen;
+    padding: 20px 20px;
+    margin-bottom: 10px;
+    width: 200px;
+    transform: scale(.7);
+}
+
+.rolesContainer {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-left: 80px;
+}
+
+form {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 8px;
+    width: 300px;
+    margin-left: 15vw;
+    border: 2px solid black;
+    border-radius: 10px;
+    transform: scale(.7);
+}
+
+.salary {
+    margin-left: -30px;
+}
+
+.rolesHeader {
+    margin-top: 70px;
+    margin-left: 150px;
+}
+
+.addRole {
+    margin-left: 150px;
+}
+
+.empForm {
+    padding: 20px 20px;
+    height: 200px;
+    margin-left: 400px;
+    transform: scale(.7);
+}
+
+.deptHeader {
+    margin-left: 150px;
+}
+
+.deptForm {
+    height: 200px;
+}
+
+.noAudits {
+    margin-left: 150px;
+    margin-top: 20px;
+}
+
+.dept {
+    background-color: lightpink;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px 20px;
+    margin-left: 300px;
+    width: 300px;
+    transform: scale(.7);
+}
+
+.dept p {
+    width: 200px;
+}
+
+.deptsContainer {
+    display: flex;
+    gap: 5px;
+    justify-content: space-between;
+    margin-left: -300px;
+    width: 80%;
+}
+
+.editDept {
+    background-color: orange;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 20px 20px;
+    margin-left: 300px;
+    width: 400px;
+    transform: scale(.7);
+    height: 300px;
+}
+
+.emp {
+    background-color: gold;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 440px;
+    height: 550px;
+    transform: scale(.5);
+}
+
+.empsContainer {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-left: 50px;
+    width: 80%;
+}
+
+.addEmp {
+    margin-top: 200px;
+}
+
+.reviewForm {
+    margin-left: 30px;
+    padding-bottom: 30px;
+    transform: scale(.7);
+}
+
+.reviewSubmit {
+    height: 30px;
+    width: 80px;
+    font-size: 12px;
+}
+
+.promoteForm {
+    margin-left: 25px;
+    margin-top: 20px;
+    transform: scale(.7);
+}
+
+.editEmpForm {
+    padding: 20px 20px;
+    height: 400px;
+    width: 600px;
+    transform: scale(.7);
+}
+
+.auditsContainer {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-left: 50px;
+    width: 80%;
+}
+
+.audit {
+    background-color: yellow;
+    width: 250px;
+    margin-left: 250px;
+    border: 2px solid black;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    ;
+}
+
+.audit p {
+    width: 200px;
 }

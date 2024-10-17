@@ -4,10 +4,11 @@ import axios from 'axios';
 function Audit({ setAudits, audits }) {
   return (
     <div>
-      <div>
+      <h2>Audits</h2>
+      <div class="auditsContainer">
         {audits && audits.length > 0 ? (
           audits.map((audit, index) => (
-            <div key={audit.id}>
+            <div className="audit" key={audit.id}>
 
               <p>Salary: {audit.salary}</p>
               <p>Type: {audit.type}</p>
@@ -15,7 +16,7 @@ function Audit({ setAudits, audits }) {
             </div>
           ))
         ) : (
-          <div>No audits available</div>
+          <div className="noAudits">No audits available</div>
         )}
       </div>
     </div>
