@@ -1,0 +1,233 @@
+.App {
+    text-align: center;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.userContainer {
+    margin-top: 20%;
+    margin-left: 32.5%;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 400px;
+    text-align: center;
+    padding: 20px 20px;
+}
+
+.container {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    width: 90%;
+    /* Use percentage to make it flexible */
+    max-width: 400px;
+    /* Limit max width */
+    margin: 20px auto;
+    /* Center the container */
+}
+
+.navContainer {
+    margin-top: 100px;
+    margin-left: 45% !important;
+    background-color: gold;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    padding: 20px 20px;
+    margin: 0 auto 20px;
+    margin-top: 20px;
+}
+
+body {
+    background-color: lightblue;
+    margin: 0;
+    padding: 0;
+}
+
+.aboutContainer {
+    margin-left: 35%;
+    margin-top: 20%;
+    margin-left: 40%;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 400px;
+    text-align: center;
+    padding: 20px 20px;
+}
+
+.contactContainer {
+    margin-left: 40%;
+    margin-top: 20%;
+    margin-left: 40%;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    width: 400px;
+    text-align: center;
+    padding: 20px 20px;
+}
+
+.contactContainer button {
+    margin-left: 50%;
+}
+
+.homeContainer {
+    margin-left: 40%;
+}
+
+.projectsContainer {
+    margin-top: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.card {
+    background-color: lightgreen;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px 20px;
+    text-align: center;
+    list-style-type: none;
+}
+
+.projDetailsContainer {
+    background-color: yellowgreen;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px 20px;
+    margin-top: 20px;
+}
+
+.userContainer,
+.aboutContainer,
+.contactContainer {
+    margin-top: 10%;
+    /* Reduce top margin */
+}
+
+.card,
+.projDetailsContainer {
+    background-color: lightgreen;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px;
+    width: 90%;
+    /* Make cards responsive */
+    max-width: 400px;
+    /* Limit max width */
+    margin: 10px auto;
+}
+
+@media (min-width: 768px) {
+    .userContainer,
+    .aboutContainer,
+    .contactContainer {
+        width: 60%;
+        max-width: 600px;
+    }
+    .projectsContainer {
+        flex-direction: row;
+        /* Align projects side by side */
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+    .card,
+    .projDetailsContainer {
+        width: 45%;
+        /* Take half width on larger screens */
+    }
+}
+
+@media (min-width: 1200px) {
+    .userContainer,
+    .aboutContainer,
+    .contactContainer {
+        width: 40%;
+    }
+    .projectsContainer {
+        width: 80%;
+    }
+}
+
+.userContainer,
+.aboutContainer,
+.contactContainer {
+    margin-top: 5%;
+    margin-left: 35%;
+}
+
+.success-flash {
+    background-color: green;
+    width: 200px;
+    color: white;
+    margin-left: 35%;
+    margin-top: 20px;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.contactContainer button {
+    margin-left: 45%
+}
+
+.projDetailsContainer {
+    max-width: 600px;
+    /* Set a max width */
+    margin: 0 auto;
+    /* Center the container */
+    padding: 20px;
+    /* Add padding inside the container */
+    border: 1px solid #ccc;
+    /* Optional: add a border for visual clarity */
+    border-radius: 8px;
+    /* Optional: round the corners */
+    overflow: auto;
+    /* Prevent overflow */
+    box-sizing: border-box;
+    /* Include padding and border in the element's total width and height */
+    background-color: #f9f9f9;
+    /* Optional: set a background color */
+    margin: 0;
+    width: 100%;
+}
