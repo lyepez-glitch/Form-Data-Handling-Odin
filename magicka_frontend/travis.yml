@@ -1,0 +1,24 @@
+language: node_js
+
+node_js:
+  - "v21.7.1"  # Use the version of Node.js you are using in your Vite app
+
+cache:
+  directories:
+    - node_modules
+
+install:
+  - npm install  # Install dependencies
+
+script:
+  - npm run build  # Build the production-ready app
+
+deploy:
+  provider: vercel  # Use Vercel for deployment
+  edge: true  # Optional: Enable Edge if needed
+  token: $VERCEL_TOKEN  # Set your Vercel token in Travis CI environment variables
+  project: form-data-handling-odin  # Your Vercel project name
+  org: lucas-projects-f61d5cb5  # Your Vercel organization name
+  skip_cleanup: true  # Skip cleaning up after build
+  on:
+    branch: main  # Deploy only from the main branch
